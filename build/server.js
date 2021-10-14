@@ -27,12 +27,10 @@ var Server = /** @class */ (function () {
         this.app.use((0, cors_1.default)());
         this.app.use((0, compression_1.default)());
         this.app.use(function (req, res, next) {
-            res.header('Acces-Control-Allow-Origin', '*');
-            res.header('Acces-Control-Allow-Headers', 'origin, X-Requested-With,Content-Type,Accept, Authorization');
-            if (req.method === 'OPTIONS') {
-                res.header('Access-Control-Allow-Methods', 'GET PATCH DELETE POST');
-                return res.status(200).json({});
-            }
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, ContentType, Accept");
+            res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+            res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
             next();
         });
     };
