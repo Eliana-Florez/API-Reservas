@@ -15,6 +15,12 @@ class bookingsRoutes {
         res.json(reservas);
     }
 
+    //GET by ID
+    public async getReservaID(req: Request, res: Response): Promise<void> {
+        const reservas = await reserva.findById(req.params.id);
+        res.json(reservas);
+    }
+
 
     public async postReserva(req: Request, res: Response): Promise<void> {
         const newReserva = new reserva(req.body);
@@ -24,23 +30,27 @@ class bookingsRoutes {
     }
 
     public async putReserva(req: Request, res: Response): Promise<void> {
-        const { codReserva } = req.body;
-        const post = await reserva.findOneAndUpdate({ codReserva }, req.body);
-        res.json({ status: res.status, data: post });
+        const reservaPut = await reserva.findByIdAndUpdate(
+            req.params.id,
+            {
+                $set: req.body,
+            }
+        );
+        res.json({ status: res.status, data: reservaPut });
     }
 
     public async deleteReserva(req: Request, res: Response): Promise<void> {
-        const { codReserva } = req.body;
-        const post = await reserva.findOneAndRemove({ codReserva });
+        const reservaDel = await reserva.findByIdAndRemove(req.params.id);
         res.json({ status: res.status, data: 'Reserva Eliminada' });
     }
 
 
     routes() {
         this.router.get("/", this.getReserva);
+        this.router.get("/:id", this.getReservaID);
         this.router.post("/", this.postReserva);
-        this.router.put("/", this.putReserva);
-        this.router.delete("/", this.deleteReserva);
+        this.router.put("/:id", this.putReserva);
+        this.router.delete("/:id", this.deleteReserva);
     }
 }
 

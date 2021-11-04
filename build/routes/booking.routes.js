@@ -60,6 +60,21 @@ var bookingsRoutes = /** @class */ (function () {
             });
         });
     };
+    //GET by ID
+    bookingsRoutes.prototype.getReservaID = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var reservas;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, bookings_1.default.findById(req.params.id)];
+                    case 1:
+                        reservas = _a.sent();
+                        res.json(reservas);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     bookingsRoutes.prototype.postReserva = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var newReserva;
@@ -78,15 +93,15 @@ var bookingsRoutes = /** @class */ (function () {
     };
     bookingsRoutes.prototype.putReserva = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var codReserva, post;
+            var reservaPut;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        codReserva = req.body.codReserva;
-                        return [4 /*yield*/, bookings_1.default.findOneAndUpdate({ codReserva: codReserva }, req.body)];
+                    case 0: return [4 /*yield*/, bookings_1.default.findByIdAndUpdate(req.params.id, {
+                            $set: req.body,
+                        })];
                     case 1:
-                        post = _a.sent();
-                        res.json({ status: res.status, data: post });
+                        reservaPut = _a.sent();
+                        res.json({ status: res.status, data: reservaPut });
                         return [2 /*return*/];
                 }
             });
@@ -94,14 +109,12 @@ var bookingsRoutes = /** @class */ (function () {
     };
     bookingsRoutes.prototype.deleteReserva = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var codReserva, post;
+            var reservaDel;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        codReserva = req.body.codReserva;
-                        return [4 /*yield*/, bookings_1.default.findOneAndRemove({ codReserva: codReserva })];
+                    case 0: return [4 /*yield*/, bookings_1.default.findByIdAndRemove(req.params.id)];
                     case 1:
-                        post = _a.sent();
+                        reservaDel = _a.sent();
                         res.json({ status: res.status, data: 'Reserva Eliminada' });
                         return [2 /*return*/];
                 }
@@ -110,9 +123,10 @@ var bookingsRoutes = /** @class */ (function () {
     };
     bookingsRoutes.prototype.routes = function () {
         this.router.get("/", this.getReserva);
+        this.router.get("/:id", this.getReservaID);
         this.router.post("/", this.postReserva);
-        this.router.put("/", this.putReserva);
-        this.router.delete("/", this.deleteReserva);
+        this.router.put("/:id", this.putReserva);
+        this.router.delete("/:id", this.deleteReserva);
     };
     return bookingsRoutes;
 }());
