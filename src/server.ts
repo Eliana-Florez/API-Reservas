@@ -8,6 +8,8 @@ import http from 'http';
 import clienteRoutes from "./routes/cliente.routes";
 import reservaRoutes from "./routes/reserva.routes";
 import habitacionRoutes from "./routes/habitacion.routes";
+import bookingRoutes from "./routes/booking.routes";
+
 
 class Server {
     public app: express.Application;
@@ -39,6 +41,7 @@ class Server {
         this.app.use("/api/clientes", clienteRoutes);
         this.app.use("/api/reservas", reservaRoutes);
         this.app.use("/api/habitaciones", habitacionRoutes);
+        this.app.use("/api/bookings", bookingRoutes);
 
     }
 
