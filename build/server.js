@@ -14,6 +14,7 @@ var cliente_routes_1 = __importDefault(require("./routes/cliente.routes"));
 var reserva_routes_1 = __importDefault(require("./routes/reserva.routes"));
 var habitacion_routes_1 = __importDefault(require("./routes/habitacion.routes"));
 var booking_routes_1 = __importDefault(require("./routes/booking.routes"));
+var contactenos_routes_1 = __importDefault(require("./routes/contactenos.routes"));
 var Server = /** @class */ (function () {
     function Server() {
         this.app = (0, express_1.default)();
@@ -40,6 +41,7 @@ var Server = /** @class */ (function () {
         this.app.use("/api/reservas", reserva_routes_1.default);
         this.app.use("/api/habitaciones", habitacion_routes_1.default);
         this.app.use("/api/bookings", booking_routes_1.default);
+        this.app.use("/api/mensajes", contactenos_routes_1.default);
     };
     Server.prototype.start = function () {
         var _this = this;

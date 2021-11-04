@@ -9,6 +9,7 @@ import clienteRoutes from "./routes/cliente.routes";
 import reservaRoutes from "./routes/reserva.routes";
 import habitacionRoutes from "./routes/habitacion.routes";
 import bookingRoutes from "./routes/booking.routes";
+import mensajes from "./routes/contactenos.routes";
 
 
 class Server {
@@ -42,6 +43,7 @@ class Server {
         this.app.use("/api/reservas", reservaRoutes);
         this.app.use("/api/habitaciones", habitacionRoutes);
         this.app.use("/api/bookings", bookingRoutes);
+        this.app.use("/api/mensajes", mensajes);
 
     }
 
